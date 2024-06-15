@@ -3,7 +3,9 @@ package com.springboot.test.app.system.dto
 import com.springboot.test.core.db.entity.SystemMetaEntity
 import com.springboot.test.core.type.TargetType
 
+
 class SystemDto(
+    var systemId: Long? = -1,
     var systemName: String,
     var ownerTargetId: Long,
     var ownerTargetType: TargetType,

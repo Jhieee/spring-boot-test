@@ -1,16 +1,14 @@
 package com.springboot.test.app.user.controller
 
 import com.springboot.test.app.system.dto.SystemDto
+import com.springboot.test.app.system.dto.SystemPermissionDto
 import com.springboot.test.app.system.service.SystemService
 import com.springboot.test.core.db.entity.SystemMetaEntity
+import com.springboot.test.core.db.entity.SystemPermissionEntity
 import com.springboot.test.util.response.ResponseEntity
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("api/v1/systems")
@@ -31,5 +29,16 @@ class SystemController(
         systemDto: SystemDto
     ): ResponseEntity<SystemMetaEntity>? {
         return ResponseEntity(data = systemService.addSystem(systemDto))
+    }
+
+    @PostMapping("{id}/permissions")
+    @Operation(summary = "시스템의 권한 추가", description = "시스템 정보를 추가한다.")
+    fun addSystemPermission(
+        @PathVariable("id")
+        id: Long,
+        @RequestBody
+        systemPermissionDto: SystemPermissionDto
+    ): ResponseEntity<SystemMetaEntity>? {
+        return ResponseEntity(data = systemService.addSystemPermission(id, systemPermissionDto))
     }
 }

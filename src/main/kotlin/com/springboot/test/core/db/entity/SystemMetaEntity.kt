@@ -20,6 +20,12 @@ data class SystemMetaEntity(
     @Column(name = "owner_target_type")
     var ownerTargetType: TargetType,
 
-    @OneToMany
-    var systemPermissionList: List<SystemPermission>? = listOf()
-) : BaseEntity()
+    @OneToMany(mappedBy = "systemMeta", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    var systemPermissions: MutableList<SystemPermissionEntity> = ArrayList()
+
+) : BaseEntity() {
+
+    fun addSystemPermission(permissionEntity: SystemPermissionEntity) {
+        systemPermissions.add(permissionEntity)
+    }
+}
