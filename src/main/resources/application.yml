@@ -36,6 +36,12 @@ spring:
     url: jdbc:h2:~/test  # H2 접속 정보
     username: sa
     password:
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+
+
 #  mvc:
 #    servlet:
 #      load-on-startup: 1
