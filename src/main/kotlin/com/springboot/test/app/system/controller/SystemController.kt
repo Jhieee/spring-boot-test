@@ -22,6 +22,15 @@ class SystemController(
         return ResponseEntity(data = systemService.getSystemAll())
     }
 
+    @GetMapping("{id}")
+    @Operation(summary = "시스템 조회", description = "시스템 정보를 조회한다.")
+    fun getSystem(
+        @PathVariable("id")
+        id: Long,
+    ): ResponseEntity<SystemMetaEntity> {
+        return ResponseEntity(data = systemService.getSystem(id))
+    }
+
     @PostMapping
     @Operation(summary = "시스템 추가", description = "시스템 정보를 추가한다.")
     fun addSystem(

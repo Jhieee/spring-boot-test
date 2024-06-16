@@ -1,5 +1,6 @@
 package com.springboot.test.core.db.entity
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.springboot.test.core.type.TargetType
 import jakarta.persistence.*
 
@@ -17,15 +18,17 @@ data class SystemMetaEntity(
     @Column(name = "owner_target_id")
     var ownerTargetId: Long,
 
+    @Enumerated(value = EnumType.ORDINAL)
     @Column(name = "owner_target_type")
     var ownerTargetType: TargetType,
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "systemMeta", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     var systemPermissions: MutableList<SystemPermissionEntity> = ArrayList()
 
 ) : BaseEntity() {
-
-    fun addSystemPermission(permissionEntity: SystemPermissionEntity) {
-        systemPermissions.add(permissionEntity)
-    }
+//    fun addSystemPermission(permissionEntity: SystemPermissionEntity) {
+////        this.systemPermissions = permissionEntity
+//        this.systemPermissions = permissionEntity
+//    }
 }

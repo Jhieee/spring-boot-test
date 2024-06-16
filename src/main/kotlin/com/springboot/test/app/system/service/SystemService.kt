@@ -18,14 +18,31 @@ class SystemService(
         return systemRepository.findAllBy()
     }
 
+    fun getSystem(id: Long): SystemMetaEntity {
+        runCatching {
+            systemRepository.findBySystemId(id)
+        }.onSuccess {
+            println("성공")
+
+        }.onFailure {
+            println("실패")
+        }
+
+        return systemRepository.findBySystemId(id)
+    }
+
+
     fun addSystem(systemDto: SystemDto): SystemMetaEntity {
         return systemRepository.save(SystemDto.toEntity(systemDto))
     }
 
     fun addSystemPermission(systemId: Long, systemPermissionDto: SystemPermissionDto): SystemMetaEntity {
-        systemPermissionDto.systemPermissionId = systemId
+
         val system = systemRepository.findBySystemId(systemId)
-        system.addSystemPermission(SystemPermissionDto.toEntity(systemPermissionDto))
+        val systemPermission = SystemPermissionDto.toEntity(systemPermissionDto)
+
+        systemPermission.addSystem(system)
+        systemPermissionRepository.save(systemPermission)
         return systemRepository.save(system)
     }
 }

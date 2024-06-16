@@ -1,5 +1,6 @@
 package com.springboot.test.core.db.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 
 
@@ -20,15 +21,13 @@ data class SystemPermissionEntity(
     @Column(name = "system_permission_code")
     var permissionCode: String?,
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "system_id")
+    @JoinColumn(name = "SYSTEM_ID")
     var systemMeta: SystemMetaEntity? = null
 ) : BaseEntity() {
-//
-//    fun addSystemPermission(permissionEntity: SystemPermissionEntity) {
-//        this.systemMeta = permissionEntity
-//        systemPermissions.add(permissionEntity)
-//
-//    }
+    fun addSystem(systemMeta: SystemMetaEntity) {
+        this.systemMeta = systemMeta
+    }
 }
 

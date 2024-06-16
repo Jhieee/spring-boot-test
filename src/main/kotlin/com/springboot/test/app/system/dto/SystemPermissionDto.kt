@@ -4,6 +4,7 @@ import com.springboot.test.core.db.entity.SystemPermissionEntity
 
 class SystemPermissionDto(
     var systemPermissionId: Long? = -1,
+//    var systemId: Long = -1,
     var systemPermissionName: String,
     var systemPermissionDesc: String? = null,
     var systemPermissionCode: String? = null
@@ -20,12 +21,12 @@ class SystemPermissionDto(
 
         fun toEntity(systemPermissionDto: SystemPermissionDto): SystemPermissionEntity {
             return SystemPermissionEntity(
+//                systemId = systemPermissionDto.systemId,
                 systemPermissionId = systemPermissionDto.systemPermissionId,
                 permissionName = systemPermissionDto.systemPermissionName,
                 permissionDesc = systemPermissionDto.systemPermissionDesc,
                 permissionCode = systemPermissionDto.systemPermissionCode,
-
-                )
+            )
         }
     }
 }

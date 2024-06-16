@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface SystemRepository : JpaRepository<SystemMetaEntity, Long> {
     fun findAllBy(): List<SystemMetaEntity>
+
     fun findBySystemId(id: Long): SystemMetaEntity
 }
