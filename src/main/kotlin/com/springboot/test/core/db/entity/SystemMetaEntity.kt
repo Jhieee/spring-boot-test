@@ -15,6 +15,9 @@ data class SystemMetaEntity(
     @Column(name = "system_name")
     var systemName: String,
 
+    @Column(name = "system_code")
+    var systemCode: String?,
+
     @Column(name = "owner_target_id")
     var ownerTargetId: Long,
 
@@ -27,8 +30,5 @@ data class SystemMetaEntity(
     var systemPermissions: MutableList<SystemPermissionEntity> = ArrayList()
 
 ) : BaseEntity() {
-//    fun addSystemPermission(permissionEntity: SystemPermissionEntity) {
-////        this.systemPermissions = permissionEntity
-//        this.systemPermissions = permissionEntity
-//    }
+
 }

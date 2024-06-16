@@ -2,6 +2,7 @@ package com.springboot.test.app.user.controller
 
 import com.springboot.test.app.system.dto.SystemDto
 import com.springboot.test.app.system.dto.SystemPermissionDto
+import com.springboot.test.app.system.dto.SystemPermissionUserDto
 import com.springboot.test.app.system.service.SystemService
 import com.springboot.test.core.db.entity.SystemMetaEntity
 import com.springboot.test.core.db.entity.SystemPermissionEntity
@@ -41,7 +42,7 @@ class SystemController(
     }
 
     @PostMapping("{id}/permissions")
-    @Operation(summary = "시스템의 권한 추가", description = "시스템 정보를 추가한다.")
+    @Operation(summary = "시스템의 권한 추가", description = "시스템 권한을 추가한다.")
     fun addSystemPermission(
         @PathVariable("id")
         id: Long,
@@ -49,5 +50,16 @@ class SystemController(
         systemPermissionDto: SystemPermissionDto
     ): ResponseEntity<SystemMetaEntity>? {
         return ResponseEntity(data = systemService.addSystemPermission(id, systemPermissionDto))
+    }
+
+    @PostMapping("{systemId}/permissions/{permissionId}/user")
+    @Operation(summary = "시스템의 권한에 사용자 추가", description = "시스템 권한에 사용자 추가한다.")
+    fun addSystemPermissionUser(
+        @PathVariable("permissionId")
+        id: Long,
+        @RequestBody
+        systemPermissionUserDto: SystemPermissionUserDto
+    ): ResponseEntity<SystemPermissionEntity>? {
+        return ResponseEntity(data = systemService.addSystemPermissionUser(id, systemPermissionUserDto))
     }
 }

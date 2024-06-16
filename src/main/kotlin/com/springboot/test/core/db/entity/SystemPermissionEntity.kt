@@ -1,6 +1,7 @@
 package com.springboot.test.core.db.entity
 
 import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
 
 
@@ -24,7 +25,13 @@ data class SystemPermissionEntity(
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SYSTEM_ID")
-    var systemMeta: SystemMetaEntity? = null
+    var systemMeta: SystemMetaEntity? = null,
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "systemPermission", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    var systemPermissionUsers: MutableList<SystemPermissionUserEntity> = ArrayList()
+
+
 ) : BaseEntity() {
     fun addSystem(systemMeta: SystemMetaEntity) {
         this.systemMeta = systemMeta
